@@ -15,10 +15,14 @@ pub fn main() !void {
     }
 
     for (args[1..]) |filename| {
+        try stdout.print("File name: {s}\n", .{filename});
+        try stdout.print("--------------------------------------------------------------------------------------------\n", .{});
+        try stdout.flush();
         const file = try cwd.openFile(filename, .{.mode = .read_only});
         defer file.close();
 
         var buffer:[1024 * 1024]u8 = undefined;
+
         while (true) {
             const nread = try file.read(buffer[0..]);
             if (nread <= 0) break;
