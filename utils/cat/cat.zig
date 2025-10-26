@@ -15,7 +15,7 @@ pub fn main() !void {
     }
 
     for (args[1..]) |filename| {
-        try stdout.print("File name: {s}\n", .{filename});
+        try stdout.print("\nFile name: {s}\n", .{filename});
         try stdout.print("--------------------------------------------------------------------------------------------\n", .{});
         try stdout.flush();
         const file = try cwd.openFile(filename, .{.mode = .read_only});
