@@ -11,10 +11,15 @@ pub fn main() !void {
         try stdout.flush();
         std.posix.exit(1);
     }
-    
+    var new_line:bool = true;
     for (args[1..]) |text| {
+        if(std.mem.eql(u8, text, "-n")) {
+            new_line = false;
+            continue;
+        }
         try stdout.print("{s} ", .{text});
     }
-    try stdout.print("\n", .{});
+    if(new_line)
+        try stdout.print("\n", .{});
     try stdout.flush();
 }
