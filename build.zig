@@ -32,4 +32,14 @@ pub fn build(b: *std.Build) void {
         }),
     });
     b.installArtifact(head);
+
+    const tail = b.addExecutable(.{
+        .name = "tail",
+        .root_module = b.createModule(.{
+            .optimize = optimize,
+            .target = target,
+            .root_source_file = b.path("utils/tail/tail.zig"),
+        }),
+    });
+    b.installArtifact(tail);
 }
