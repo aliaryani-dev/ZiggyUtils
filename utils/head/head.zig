@@ -13,15 +13,22 @@ pub fn main() !void {
         std.posix.exit(1);
     }
 
-    _ = try read_lines(args[1], allocator);
+    _ = try read_lines(args[1]);
 
 }
 
-fn read_lines(file_name:[]const u8,allocator:std.mem.Allocator) !void {
-    _ = allocator;
+fn read_lines(file_name:[]const u8) !void {
     const file = try cwd.openFile(file_name, .{.mode = .read_only});
     defer file.close();
     var buffer:[1024]u8 = undefined;
     const nread = try file.read(buffer[0..]);
-    std.debug.print("{s}\n", .{buffer[0..nread]});
+    var it = std.mem.splitScalar(u8, buffer[0..nread], '\n');
+    var i:u32 = 0;
+    while (it.next()) |line|{
+        if (i == 5) {
+            break;
+        } 
+        try stdout.print("{d} | {s}\n", .{(i+1),line});
+        i += 1;
+    } try stdout.flush();
 }
