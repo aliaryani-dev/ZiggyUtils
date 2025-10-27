@@ -12,4 +12,10 @@ pub fn main() !void {
         try stdout.flush();
         std.posix.exit(1);
     }
+
+}
+
+fn read_lines(file_name:[]const u8) !void {
+    const file = try cwd.openFile(file_name, .{.mode = .read_only});
+    defer file.close();
 }
