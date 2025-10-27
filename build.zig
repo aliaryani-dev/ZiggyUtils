@@ -42,4 +42,14 @@ pub fn build(b: *std.Build) void {
         }),
     });
     b.installArtifact(tail);
+
+    const pwd = b.addExecutable(.{
+        .name = "pwd",
+        .root_module = b.createModule(.{
+            .optimize = optimize,
+            .target = target,
+            .root_source_file = b.path("utils/pwd/pwd.zig"),
+        }),
+    });
+    b.installArtifact(pwd);
 }
