@@ -23,6 +23,21 @@ pub fn main() !void {
             continue;
         }
 
+        if (escape_char) {
+            if(std.mem.eql(u8, text, "\\t")) {
+                try stdout.print("\t", .{});
+                continue;
+            }
+            if(std.mem.eql(u8, text, "\\n")) {
+                try stdout.print("\n", .{});
+                continue;
+            }
+            if(std.mem.eql(u8, text, "\\r")) {
+                try stdout.print("\r", .{});
+                continue;
+            }
+        }
+
         try stdout.print("{s} ", .{text});
     }
     if(new_line)
