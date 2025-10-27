@@ -5,8 +5,8 @@ To learn Zig in an effective way, I decided to rewrite GNUUtils.<br>
 __This repo consists of three phases:
 
 ### Easy
-- [*] `cat`
-- [*] `echo`
+- [-] `cat`
+- [-] `echo`
 - [ ] `head`
 - [ ] `tail`
 - [ ] `pwd`
