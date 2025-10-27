@@ -22,4 +22,14 @@ pub fn build(b: *std.Build) void {
         }),
     });
     b.installArtifact(echo);
+
+    const head = b.addExecutable(.{
+        .name = "head",
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("utils/head/head.zig"),
+            .target = target,
+            .optimize = optimize,
+        }),
+    });
+    b.installArtifact(head);
 }
