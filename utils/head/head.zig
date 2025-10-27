@@ -13,9 +13,15 @@ pub fn main() !void {
         std.posix.exit(1);
     }
 
+    _ = try read_lines(args[1], allocator);
+
 }
 
-fn read_lines(file_name:[]const u8) !void {
+fn read_lines(file_name:[]const u8,allocator:std.mem.Allocator) !void {
+    _ = allocator;
     const file = try cwd.openFile(file_name, .{.mode = .read_only});
     defer file.close();
+    var buffer:[1024]u8 = undefined;
+    const nread = try file.read(buffer[0..]);
+    std.debug.print("{s}\n", .{buffer[0..nread]});
 }
