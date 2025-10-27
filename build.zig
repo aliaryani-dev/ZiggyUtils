@@ -52,4 +52,14 @@ pub fn build(b: *std.Build) void {
         }),
     });
     b.installArtifact(pwd);
+
+    const touch = b.addExecutable(.{
+        .name = "touch",
+        .root_module = b.createModule(.{
+            .optimize = optimize,
+            .target = target,
+            .root_source_file = b.path("utils/touch/touch.zig"),
+        }),
+    });
+    b.installArtifact(touch);
 }
