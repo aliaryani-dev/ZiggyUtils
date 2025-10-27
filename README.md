@@ -7,7 +7,7 @@ __This repo consists of three phases:
 ### Easy
 - [x] `cat`
 - [x] `echo`
-- [ ] `head`
+- [x] `head`
 - [ ] `tail`
 - [ ] `pwd`
 - [ ] `touch`
