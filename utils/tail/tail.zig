@@ -8,15 +8,18 @@ pub fn main() !void {
     const allocator = std.heap.page_allocator;
     const args = try std.process.argsAlloc(allocator);
     if(args.len == 1) {
-        try stdout.print("Usage: tail <file>\n", .{});
+        try stdout.print("Usage: tail [-n <NUM>] <file>\n", .{});
         try stdout.flush();
         std.posix.exit(1);
     }
-
-    _ = try print_lines(args[1]);
+    if(std.mem.eql(u8, args[1], "-n")){
+        _ = try print_lines(args[3],try std.fmt.parseInt(u32, args[2], 10));
+    } else {
+    _ = try print_lines(args[1],10);
+    }
 }
 
-pub fn print_lines(filename:[]const u8) !void {
+pub fn print_lines(filename:[]const u8,line_count:u32) !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     const allocator = gpa.allocator();
     const file = try cwd.openFile(filename, .{.mode = .read_only});
@@ -28,7 +31,7 @@ pub fn print_lines(filename:[]const u8) !void {
     defer list.deinit(allocator);
     var i:u32 = 0;
     while (it.next()) |line| {
-        if (i==5) break;
+        if (i==line_count) break;
         try list.append(allocator, @constCast(line));
         i += 1;
     }
