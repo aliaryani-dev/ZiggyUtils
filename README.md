@@ -8,7 +8,7 @@ __This repo consists of three phases:__
 - [x] `cat`
 - [x] `echo`
 - [x] `head`
-- [ ] `tail`
+- [x] `tail`
 - [ ] `pwd`
 - [ ] `touch`
 
