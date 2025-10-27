@@ -9,7 +9,7 @@ __This repo consists of three phases:__
 - [x] `echo`
 - [x] `head`
 - [x] `tail`
-- [ ] `pwd`
+- [x] `pwd`
 - [ ] `touch`
 
 ### Medium
