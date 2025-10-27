@@ -12,9 +12,14 @@ pub fn main() !void {
         try stdout.flush();
         std.posix.exit(1);
     }
+
+    _ = try print_lines(args[1]);
 }
 
 pub fn print_lines(filename:[]const u8) !void {
     const file = try cwd.openFile(filename, .{.mode = .read_only});
     defer file.close();
+    var buffer:[1024]u8 = undefined;
+    const nread = try file.readAll(&buffer);
+    std.debug.print("{s}\n", .{buffer[0..nread]});
 }
